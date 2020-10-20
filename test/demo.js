@@ -36,6 +36,7 @@ function requestHtml(url) {
 document.querySelector('button').onclick = function () {
     // document.querySelector('.app').innerHTML = ``;
     requestHtml('./tpl.html').then(e => {
-        console.log(e);
+        console.log(e,  importHtml);
+        
     });
 };

@@ -1,6 +1,6 @@
 {
   "name": "import-html",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "抽取html取模板js和css",
   "main": "rollup.config.js",
   "dependencies": {

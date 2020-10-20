@@ -169,6 +169,36 @@
   var genModuleScriptReplaceSymbol = function genModuleScriptReplaceSymbol(scriptSrc, moduleSupport) {
     return '<!-- '.concat(moduleSupport ? 'nomodule' : 'module', ' script ').concat(scriptSrc, ' ignored by import-html-entry -->');
   };
+  function requestHtml(url) {
+    var useragent = navigator.userAgent.includes('Android');
+
+    if (useragent || !navigator.userAgent.includes('iPhone')) {
+      return new Promise(function (resolve, reject) {
+        var request = new XMLHttpRequest();
+        var method = 'GET';
+        request.open(method, url);
+        request.send(null);
+
+        request.onreadystatechange = function () {
+          if (request.readyState == 4) {
+            resolve(request.responseText);
+          } else {
+            reject('ajax error' + request.readyState + '-' + request.status);
+          }
+        };
+      });
+    } else {
+      return new Promise(function (resolve, reject) {
+        fetch(url).then(function (response) {
+          return response.text();
+        }).then(function (data) {
+          resolve(data);
+        })["catch"](function (e) {
+          console.error('fetch', e);
+        });
+      });
+    }
+  }
   /**
    * parse the script link from the template
    * 1. collect stylesheets
@@ -213,7 +243,6 @@
           }
 
           styles.push(newHref);
-          debugger;
           return genLinkReplaceSymbol(newHref);
         }
       }
@@ -221,8 +250,6 @@
       var preloadOrPrefetchType = match.match(LINK_PRELOAD_OR_PREFETCH_REGEX) && match.match(LINK_HREF_REGEX) && !match.match(LINK_AS_FONT);
 
       if (preloadOrPrefetchType) {
-        debugger;
-
         var _match$match = match.match(LINK_HREF_REGEX),
             _match$match2 = slicedToArray(_match$match, 3),
             linkHref = _match$match2[2];
@@ -246,10 +273,8 @@
       var scriptIgnore = scriptTag.match(SCRIPT_IGNORE_REGEX);
       var moduleScriptIgnore = moduleSupport && !!scriptTag.match(SCRIPT_NO_MODULE_REGEX) || !moduleSupport && !!scriptTag.match(SCRIPT_MODULE_REGEX); // in order to keep the exec order of all javascripts
 
-      debugger;
       var matchedScriptTypeMatch = scriptTag.match(SCRIPT_TYPE_REGEX);
       var matchedScriptType = matchedScriptTypeMatch && matchedScriptTypeMatch[2];
-      debugger;
 
       if (!isValidJavaScriptType(matchedScriptType)) {
         return match;
@@ -330,6 +355,7 @@
   exports.genIgnoreAssetReplaceSymbol = genIgnoreAssetReplaceSymbol;
   exports.genLinkReplaceSymbol = genLinkReplaceSymbol;
   exports.genModuleScriptReplaceSymbol = genModuleScriptReplaceSymbol;
+  exports.requestHtml = requestHtml;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
