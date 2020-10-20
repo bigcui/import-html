@@ -1,8 +1,8 @@
 {
-  "name": "import-html",
-  "version": "1.0.2",
-  "description": "抽取html取模板js和css",
-  "main": "rollup.config.js",
+  "name": "s-import-html",
+  "version": "1.0.0",
+  "description": "抽取html取模板js和css hybrid私有化",
+  "main": "dist/importHtm.min.js",
   "dependencies": {
     "rollup": "^2.29.0",
     "rollup-plugin-babel": "^4.4.0",
@@ -22,10 +22,10 @@
     "url": "git+https://github.com/bigcui/import-html.git"
   },
   "keywords": [
-    "import-html",
+    "s-import-html",
     "抽取模板内容"
   ],
-  "author": "bigcui",
+  "author": "cuihonglei",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/bigcui/import-html/issues"
