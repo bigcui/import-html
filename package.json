@@ -1,6 +1,6 @@
 {
   "name": "s-import-html",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "抽取html取模板js和css hybrid私有化",
   "main": "dist/importHtm.min.js",
   "dependencies": {

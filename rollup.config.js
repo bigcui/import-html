@@ -10,7 +10,7 @@ import commonjs from 'rollup-plugin-commonjs';
 export default {
     input: 'src/main.js',
     output: {
-        file: 'dist/importHtm.min.js',
+        file: 'dist/importHtml.min.js',
         format: 'umd',
         moduleName: 'importHtml',
         name: 'importHtml',
