@@ -15,6 +15,7 @@
     "rollup-plugin-uglify": "^6.0.4"
   },
   "scripts": {
+    "build": "rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
