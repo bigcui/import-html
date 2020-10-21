@@ -71,11 +71,11 @@ export function requestHtml(url) {
                 if (request.readyState == 4) {
                     resolve(request.responseText);
                 }
-                else {
-                    reject('ajax error'+ request.readyState +'-'+ request.status);
-                }
 
             };
+            setTimeout(function () {
+                reject('超时error requesthtml');
+            }, 5000);
         });
     }
     else {
@@ -90,6 +90,7 @@ export function requestHtml(url) {
         });
     }
 }
+
 /**
  * parse the script link from the template
  * 1. collect stylesheets
