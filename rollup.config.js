@@ -14,7 +14,7 @@ export default {
         format: 'umd',
         moduleName: 'importHtml',
         name: 'importHtml',
-        sourcemap: true
+        sourcemap: false
     },
     plugins: [
         resolve(),
